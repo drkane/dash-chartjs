@@ -54,7 +54,7 @@ app.layout = html.Div(style={"maxWidth": "50%"}, children=[
     [Input(component_id='swap-colours', component_property='n_clicks')],
     [State(component_id='example-doughnut-chart', component_property='data')]
 )
-def reset_(_, data):
+def swap_colours(_, data):
     new_colours = sample(COLOURS, k=len(COLOURS))
     data['labels'] = [c[0] for c in new_colours]
     data['datasets'][0]['backgroundColor'] = [c[1] for c in new_colours]
@@ -66,7 +66,7 @@ def reset_(_, data):
     [Input(component_id='reset-values', component_property='n_clicks')],
     [State(component_id='example-bar-chart', component_property='data')]
 )
-def reset_(_, data):
+def reset_values(_, data):
     data['datasets'][0]['data'] = [randint(1,10000000), randint(1,10000000), randint(1,10000000)]
     return data
 
@@ -75,7 +75,7 @@ def reset_(_, data):
     [Input(component_id='toggle-log', component_property='n_clicks')],
     [State(component_id='example-bar-chart', component_property='options')]
 )
-def reset_(_, options):
+def toggle_log(_, options):
     scale_type = options.get('scales', {}).get('xAxes', [{}])[0].get('type') if options else None
     new_options = {
         'scales': {
